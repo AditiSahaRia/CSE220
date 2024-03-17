@@ -1,0 +1,137 @@
+#Aditi Saha Ria
+#ID: 20101238
+#Task 01
+
+class KeyIndex:
+    def __init__(self, a):
+        self.a = a
+        min = 0
+        max = 0
+
+        for i in self.a:
+            if i > max:
+                max = i
+            elif i < min:
+                min = i
+
+        if min < 0:
+            min = min * (-1)
+
+        for i in range(len(self.a)):
+           self.a[i] = self.a[i]+min
+
+        max = max+min
+
+        self.k = [0]*(1+max)
+
+        for i in range(len(self.a)):
+            element = self.a[i]
+            self.k[element] = self.k[element]+1
+
+        for i in range(len(self.a)):
+           self.a[i] = self.a[i]-min
+
+    def search(self, val):
+        min = 0
+        max = 0
+
+        for i in self.a:
+            if i > max:
+                max = i
+            elif i < min:
+                min = i
+
+        if min < 0:
+            min = min * (-1)
+
+        val = val+min
+
+        if self.k[val] != 0:
+            return True
+        else:
+            return False
+
+    def sort(self):
+        min = 0
+        max = 0
+        s = [0]*len(self.a)
+        index = 0
+
+        for i in self.a:
+            if i > max:
+                max = i
+            elif i < min:
+                min = i
+
+        if min < 0:
+            min = min * (-1)
+
+        for i in range(len(self.k)):
+            if self.k[i] != 0:
+                for j in range(self.k[i]):
+                    s[index] = i-min
+                    index += 1
+
+        for i in range(len(s)):
+            self.a[i] = s[i]
+
+        return self.a
+
+
+arr = [9,-3,-4,5,-3]
+
+b = KeyIndex(arr)
+print(b.search(3))
+print(b.sort())
+
+
+
+
+##===================================================================================================================##
+##===================================================================================================================##
+
+
+
+#Aditi Saha Ria
+#ID: 20101238
+#Task 01
+
+class Hashing:
+    def __init__(self, arr):
+        self.arr = arr
+
+    def hash_calculation(self):
+
+        str_list = [0]*len(self.arr)
+
+        for j in self.arr:
+            sum = 0
+            const = 0
+            for i in j:
+                if (ord(i) > 65 and ord(i) < 69) or (ord(i) > 69 and ord(i) < 73) or (ord(i) > 73 and ord(i) < 79) or (
+                        ord(i) > 79 and ord(i) < 85) or (ord(i) > 85 and ord(i) < 91):
+                    const += 1
+
+                elif ord(i) > 47 and ord(i) < 58:
+                    sum = sum + int(i)
+
+            index = ((const * 24) + sum) % 9
+
+            if str_list[index]==0:
+                str_list[index] = j
+            else:
+                for k in range(index+1,len(str_list)):
+                    if str_list[k] == 0:
+                        str_list[k] = j
+                        break
+                else:
+                    for l in range(index):
+                        if str_list[l] == 0:
+                            str_list[l] = j
+                            break
+
+        return str_list
+
+a = ['ST189B832','ST189B832','ABCU123','AB123','ABX']
+b = Hashing(a)
+print(b.hash_calculation())

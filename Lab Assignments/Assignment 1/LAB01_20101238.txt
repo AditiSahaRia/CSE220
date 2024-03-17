@@ -1,0 +1,203 @@
+#Aditi Saha Ria
+#ID:20101238
+#Task_01 of Linear Arrays
+def shiftLeft( source, k):
+    i = 0
+    index = k
+    last_index = 1
+    while(i<len(source)-k):
+        source[i]= source[index]
+        i = i+1
+        index = index+1
+    while(last_index<=k):
+      source[len(source)-last_index] = 0
+      last_index = last_index+1
+    return source
+
+shiftLeft([10,20,30,40,50,60], 4)
+
+#Aditi Saha Ria
+#ID:20101238
+#Task_02 of Linear Arrays
+def rotateLeft( source, k):
+    i = 0
+    j = 0
+    l = 0
+    index = k
+    next_index = k
+    last_index = 1
+    new_source = ['']*len(source)
+    while(j<k):
+      new_source[l] = source[j]
+      j = j+1
+      l = l+1
+    while(i<len(source)-k):
+        source[i]= source[index]
+        i = i+1
+        index = index+1
+    while(last_index<=k):
+      source[len(source)-last_index] = new_source[next_index-1]
+      last_index = last_index+1
+      next_index = next_index-1
+    return source
+rotateLeft([10,20,30,40,50,60], 1)
+
+#Aditi Saha Ria
+#ID:20101238
+#Task_03 of Linear Arrays
+def remove( source, size, idx):
+    while(idx<size-1):
+        source[idx]= source[idx+1]
+        idx = idx+1
+    source[size-1] = 0
+    return source
+remove([10,20,30,40,50,0], 5, 2)
+
+#Aditi Saha Ria
+#ID:20101238
+#Task_04 of Linear Arrays
+def removeAll( source, size, element):
+  i = 0
+  while(i<size):
+    if source[i]==element:
+      j = i
+      while(j<size-1):
+        source[j]=source[j+1]
+        j = j+1
+      source[size-1] = 0
+      i = 0
+    else:
+      i = i+1
+  return source
+removeAll([10,2,30,2,50,2,2,0,0],7,2)
+
+#Aditi Saha Ria
+#ID:20101238
+#Task_05 of Linear Arrays
+def split(array):
+  result = False
+  sum1 = 0
+  sum2 = 0
+  for i in range(len(array)):
+    sum1 += array[i]
+    for j in range(i+1, len(array)):
+      sum2 += array[j]
+    if sum2==sum1:
+      result = True
+      break
+    sum2 = 0
+  return result
+split([10, 3, 1, 2, 10])
+
+
+#Aditi Saha Ria
+#ID:20101238
+#Task_06 of Linear Arrays
+def series(n):
+  array = ['']*n*n
+  l = 0
+  for i in range(n):
+    for j in range(n-(i+1)):
+      array[l] = 0
+      l += 1
+    k = i+1
+    while k>0:
+      array[l] = k
+      k -= 1
+      l += 1
+  return array
+series(4)
+
+#Aditi Saha Ria
+#ID:20101238
+#Task_07 of Linear Arrays
+def bunch(array):
+  count = 0
+  big_bunch = 0
+  for i in range(len(array)-1):
+    if array[i] == array[i+1]:
+      count += 1
+    else:
+      count = 0
+    if count > big_bunch:
+        big_bunch = count
+  return big_bunch+1
+bunch([1,1,2,2,2,3,3,3,3,3,3,1,1,1,1])
+
+#Aditi Saha Ria
+#ID:20101238
+#Task_08 of Linear Arrays
+def repetition(array):
+  frst = 0
+  scnd = 0
+  count = 0
+  ans = False
+  for i in range(len(array)-1):
+    for j in range(i+1,len(array)):
+      if array[j] == array[i]:
+        frst += 1
+    if scnd == frst:
+      ans = True
+    elif count == frst:
+      ans = True
+    if frst>1:
+      scnd = frst
+    if frst>scnd:
+      count = frst
+    frst = 0
+  return ans
+repetition([3,7,7,4,7,6,3,4,7,4,6,8,6,6])
+
+#Aditi Saha Ria
+#ID:20101238
+#Task_01 of Circular Arrays
+def circularPalindrome(array, start, size):
+  index = 0
+  status = 0
+  if start != 0:
+    for i in range(len(array)):
+      if array[i]==0:
+        index = i
+        break
+    index = index-1
+  for i in range(start,len(array)):
+    if array[i] != array[index]:
+      status += 1
+      return False
+    if index == 0:
+      break
+    else:
+      index = index-1
+  if status == 0:
+    return True
+  else:
+    return False
+circularPalindrome([30,20,10,0,0,10,20,30], 5, 6)
+
+#Aditi Saha Ria
+#ID:20101238
+#Task_02 of Circular Arrays
+def intersection(array_01, start_1, size_1, array_02, start_2, size_2):
+  count = 0
+  index = start_1
+  i = 0
+  j = 0
+  l = 0
+  while(i<size_1):
+    if array_01[index] in array_02:
+      count += 1
+    index=(index+1)%len(array_01)
+    i = i+1
+  linear_array = ['']*count
+  i = 0
+  index = start_1
+  while(i<size_1):
+    if array_01[index] in array_02:
+      linear_array[l] = array_01[index]
+      l += 1
+    index=(index+1)%len(array_01)
+    i += 1
+  return linear_array
+
+intersection([40,5,0,0,0,10,20,30], 5, 5, [10,20,5,0,0,0,0,0,5,40,15,25], 8, 7)
+
